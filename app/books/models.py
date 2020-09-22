@@ -1,8 +1,12 @@
+from datetime import datetime
+
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Q
 
 
-class Authors(models.Model):
+class Author(models.Model):
     first_name = models.CharField(max_length=100)
     second_name = models.CharField(max_length=100)
     company_name = models.CharField(max_length=100)
@@ -18,3 +22,25 @@ class Authors(models.Model):
                                     condition=Q(company_name__isnull=False))
 
         ]
+
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=100)
+
+
+def validate_publication_date(value):
+    if value > datetime.utcnow():
+        raise ValidationError("publication_date cant be in the future")
+
+
+class Book(models.Model):
+    isbn = models.CharField(primary_key=True, max_length=255)
+    title = models.CharField(max_length=100, null=False)
+    publication_date = models.DateField(validators=[validate_publication_date])
+    edition = models.IntegerField()
+    available_quantity = models.IntegerField(null=False, default=0, validators=[MinValueValidator(0)])
+    price = models.IntegerField(validators=[MinValueValidator(0)])
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+
+
