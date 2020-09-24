@@ -7,6 +7,3 @@ class Migration(migrations.Migration):
     dependencies = [
         ('books', '0001_initial'),
     ]
-
-    operations = [
-        migrations.RunSQL("INSERT INTO books_authors (first_name,second_name,company_name) VALUES ('Corby','Bale','Daugherty, Volkman and Kutch'),('Orlando','Sharram','Grady and Sons'),('Boyd','Owthwaite','Zboncak, Lockman and Olson'),('Stearne','Fewkes','Jenkins-Ward'),('Carmine','McAuslan','Carter-Kuvalis'),('Vally','Whatsize','McCullough Inc'),('Uriel','Catcheside','Haley LLC'),('Gardiner','Scanes','Franecki, Hodkiewicz and Paucek')")]
