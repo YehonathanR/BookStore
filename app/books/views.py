@@ -3,20 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework.viewsets import ModelViewSet
 
-from books.models import Author, Publisher, Book
-from books.serializers import AuthorSerializer, BookSerializer, PublisherSerializer
+from books.models import Books
+from books.serializers import BooksSerializer
 
 
-class AuthorViewSet(ModelViewSet):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
+class BooksViewSet(ModelViewSet):
+    queryset = Books.objects.all()
+    serializer_class = BooksSerializer
 
-
-class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-
-
-class PublisherViewSet(ModelViewSet):
-    queryset = Publisher.objects.all()
-    serializer_class = PublisherSerializer

@@ -17,12 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from books.views import AuthorViewSet, PublisherViewSet, BookViewSet
+from books.views import BooksViewSet
 
 router = DefaultRouter()
-router.register(r'authors', AuthorViewSet)
-router.register(r'books', BookViewSet)
-router.register(r'publishers', PublisherViewSet)
+router.register(r'books', BooksViewSet)
 
 
 urlpatterns = [
